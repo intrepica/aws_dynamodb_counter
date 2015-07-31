@@ -1,17 +1,17 @@
 {
   "name": "aws_dynamodb_counter",
   "version": "1.0.0",
-  "description": "",
+  "description": "Aws DynamoDb Counter ====================",
   "main": "index.js",
   "author": "Tim Fairbrother <tdfairbrother@gmail.com>",
   "scripts": {
-    "test": "node_modules/.bin/mocha --compilers js:babel/register",
-    "run": "node_modules/.bin/babel index.js"
+    "test": "mocha --compilers js:babel/register",
+    "run": "babel index.js"
   },
   "repository": {
     "type": "git",
     "url": "https://github.com/intrepica/aws_dynamodb_counter"
-  },  
+  },
   "license": "ISC",
   "dependencies": {
     "aws-sdk": "^2.1.40"
@@ -22,5 +22,15 @@
     "mocha": "^2.2.4",
     "proxyquire": "^1.4.0",
     "sinon": "^1.14.1"
-  }
+  },
+  "bugs": {
+    "url": "https://github.com/intrepica/aws_dynamodb_counter/issues"
+  },
+  "homepage": "https://github.com/intrepica/aws_dynamodb_counter",
+  "directories": {
+    "test": "test"
+  },
+  "keywords": [
+    "dynamodb"
+  ]
 }
