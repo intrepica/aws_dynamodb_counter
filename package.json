@@ -1,6 +1,6 @@
 {
   "name": "aws_dynamodb_counter",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Aws DynamoDb Counter ====================",
   "main": "index.js",
   "author": "Tim Fairbrother <tdfairbrother@gmail.com>",
