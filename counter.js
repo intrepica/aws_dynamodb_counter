@@ -5,20 +5,6 @@ AWS.config.apiVersion = '2012-08-10';
 
 var dynamodb = new AWS.DynamoDB();
 
-// Counter = require('./counter')('wordmaniaUserGames-staging', 'user_id', 'A23894');
-// Counter.increment({ words:10, games:1 }, '55ad340609f4b302', console.log);
-
-// increment( table (dynamo table) , key (primary key in table to increment eg. user_Id), keyValue, object containing (field name):(increment by) key vals, unique id of event (md5 of the event object) )
-
-// Example:
-// event = { timestame:2142155263, user_id:'A2992442', score:325  }
-// id = md5(event)
-// key = event.user_id
-// table = 'gameCounts'
-// increment(table, key, id)
-//  or
-// decrement(table, key, id)
-
 module.exports = function setup(table, keyName, keyValue) {
   return new Counter(table, keyName, keyValue);
 };
