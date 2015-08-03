@@ -69,7 +69,15 @@ Counter.prototype.updateItem = function(action, fields, id, callback) {
     ExpressionAttributeValues: expressionAttributeValues
   };
 
-  dynamodb.updateItem(params, callback);
+  dynamodb.updateItem(params, function(err) {    
+    if (err && err.code === 'ConditionalCheckFailedException') {
+      return callback(null);
+    } else if (err) {
+      err.dynamo_params = JSON.stringify(params);
+      return callback(err);
+    }
+    callback();
+  });
 }
 
 
