@@ -5,11 +5,25 @@ Increments or decrements a counter in Dynamodb. The counter is atomic and idempo
 
 [![Build Status](https://semaphoreci.com/api/v1/projects/12aacbe8-02c5-4d28-8b7a-fb989f4f7ded/500402/badge.svg)](https://semaphoreci.com/lp/aws_dynamodb_counter)     
 
-### Counter(table, keyName, keyValue)
+Example
+--------------
+
+### Counter(table, hashKeyName, hashKeyValue, [rangeKey, rangeKeyValue])
 
 table - dynamo table
-key - primary key in table to increment
-keyValue - primary key value
+
+hashKeyName - hash key in table to increment
+
+hashKeyValue - hash key value
+
+rangeKey - range key in table to increment
+
+rangeKeyValue - range key value
+
+```js
+    var Counter = require('./counter')('dbName', 'HASH_KEY', 'HASH_KEY_VALUE');
+```
+
 
 ### increment(fieldsToIncrement, id, callback)
 
@@ -20,6 +34,18 @@ id = unique id of event (md5 of the event object)
 ```
     UpdateExpression: ADD #id :ss, #counter :increment_by
     ConditionExpresssion: attribute_not_exists(#id) or (NOT contains(#id, :id))
+```
+
+
+```js
+    Counter.increment({ words:10, games:1 }, '55ad340609f4b302', function(err) {
+        if (err) {
+            throw err;
+        }
+
+        // Success!
+    });
+
 ```
 
 
@@ -34,29 +60,6 @@ id = unique id of event (md5 of the event object)
    ConditionExpresssion: attribute_exists(#id) and contains(#id, :id)
 ```
 
-Example
---------------
-
-#Setup
-
-```js
-    var Counter = require('./counter')('dbName', 'PRIMARY_KEY', 'KEY_VALUE');
-```
-
-#Incrementing
-
-```js
-    Counter.increment({ words:10, games:1 }, '55ad340609f4b302', function(err) {
-        if (err) {
-            throw err;
-        }
-
-        // Success!
-    });
-
-```
-
-#Decrementing
 
 ```js
     Counter.decrement({ words:10, games:1 }, '55ad340609f4b302', function(err) {

@@ -5,15 +5,20 @@ AWS.config.apiVersion = '2012-08-10';
 
 var dynamodb = new AWS.DynamoDB();
 
-module.exports = function setup(table, keyName, keyValue) {
-  return new Counter(table, keyName, keyValue);
+module.exports = function setup(table, hashKeyName, hashKeyValue, rangeKey, rangeKeyValue) {
+  return new Counter(table, hashKeyName, hashKeyValue, rangeKey, rangeKeyValue);
 };
 
-function Counter(table, keyName, keyValue) {
+function Counter(table, hashKeyName, hashKeyValue, rangeKey, rangeKeyValue) {
   this.table = table;  
   this.key = {};
-  var key = this.key[keyName] = {};
-  key['S'] = keyValue; // Currently only works for string keys.
+  var key = this.key[hashKeyName] = {};
+  key['S'] = hashKeyValue; // Currently only works for string keys.
+
+  if (rangeKey) {
+    var rKey = this.key[rangeKey] = {};
+    rKey['S'] = rangeKeyValue
+  }
 }
 
 Counter.prototype.increment = function(fieldsToIncrement, id, callback) {
